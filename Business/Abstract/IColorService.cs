@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IBrandService
+    public interface IColorService
     {
-        IDataResult<List<Brand>> GetAll();
-        IDataResult<Brand> GetById(Expression<Func<Brand, bool>> filter);
-        IResult Add(Brand brand);
-        IResult Update(Brand brand);
-        IResult Delete(Brand brand);
+        IDataResult<List<Color>> GetAll();
+        IDataResult<Color> GetById(Expression<Func<Color,bool>> filter);
+        IResult Add(Color color);
+        IResult Update(Color color);
+        IResult Delete(Color color);
+
     }
 }

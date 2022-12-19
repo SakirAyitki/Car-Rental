@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace Business.Constants
 {
-    public class Messages
+    public static class Messages
     {
-        public static string CarAdded = "Car Added Succesfully!";
-        public static string CarDeleted = "Car Deleted Succesfully!";
-        public static string CarUpdated = "Car Updated Succesfully!";
-        public static string CarNameInvalid = "Car Name is Invalid!!";
+        public static readonly string SaveSuccessful = "Kaydetme İşlemi Başarılı";
+        public static readonly string SaveFailed = "Kaydetme İşlemi Sırasında Hata Oluştu";
+        public static readonly string DeleteSuccessful = "Silme İşlemi Başarılı";
+        public static readonly string DeleteFailed = "Silme İşlemi Sırasında Hata Oluştu";
+        public static readonly string UpdateSuccessful = "Güncelleme İşlemi Başarılı";
+        public static readonly string UpdateFailed = "Güncelleme İşlemi Sırasında Hata Oluştu";
+        public static readonly string ListedSuccessful = "Listeleme İşlemi Başarılı";
+        public static readonly string ListedFailed = "Listeleme İşlemi Sırasında Hata Oluştu";
 
     }
 }
