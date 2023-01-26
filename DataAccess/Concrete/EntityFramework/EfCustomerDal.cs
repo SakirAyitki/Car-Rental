@@ -17,7 +17,8 @@ namespace DataAccess.Concrete.EntityFramework
             using (ReCapContext context = new ReCapContext())
             {
                 var result = from c in context.Customers
-                             join u in context.Users on c.UserId equals u.Id
+                             join u in context.Users 
+                             on c.UserId equals u.Id
                              select new CustomerDetailDto
                              {
                                  Id = c.Id,
@@ -26,7 +27,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  UserEmail = u.Email,
                                  CompanyName = c.CompanyName
                              };
-                return result.ToList(); 
+                return result.ToList();
 
             }
         }

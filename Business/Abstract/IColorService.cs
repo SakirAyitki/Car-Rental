@@ -13,7 +13,7 @@ namespace Business.Abstract
     public interface IColorService
     {
         IDataResult<List<Color>> GetAll();
-        IDataResult<Color> GetById(Expression<Func<Color,bool>> filter);
+        IDataResult<Color> GetById(Expression<Func<Color, bool>> filter);
         IResult Add(Color color);
         IResult Update(Color color);
         IResult Delete(Color color);
