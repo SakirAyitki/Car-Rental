@@ -20,7 +20,7 @@ namespace Business.Concrete
         IUserDal _userDal;
         public UserManager(IUserDal userDal)
         {
-            _userDal=userDal;
+            _userDal = userDal;
         }
 
         [ValidationAspect(typeof(UserValidator))]
@@ -38,16 +38,16 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            if(_userDal.GetAll().Count==0)
+            if (_userDal.GetAll().Count == 0)
             {
-                return new ErrorDataResult<List<User>>(_userDal.GetAll(),Messages.ListedFailed);
+                return new ErrorDataResult<List<User>>(_userDal.GetAll(), Messages.ListedFailed);
             }
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.ListedSuccessful);
         }
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u=>u.Id==id),Messages.ListedSuccessful);
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id), Messages.ListedSuccessful);
         }
 
         public IResult Update(User user)

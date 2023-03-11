@@ -6,6 +6,7 @@ using Business.DependencyResolvers.Autofac;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 
+// AutoFac IoC'si tanimlama
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(services => new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder => { builder.RegisterModule(new AutofacBusinessModule()); });
@@ -13,6 +14,7 @@ builder.Host.UseServiceProviderFactory(services => new AutofacServiceProviderFac
 // Add services to the container.
 
 builder.Services.AddControllers();
+// .Net'in kendi IoC'si
 //builder.Services.AddSingleton<ICarService,CarManager>();
 //builder.Services.AddSingleton<ICarDal, EfCarDal>();
 //builder.Services.AddSingleton<IBrandService, BrandManager>();

@@ -28,7 +28,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            if(rental.ReturnDate == null)
+            if (rental.ReturnDate == null)
             {
                 return new ErrorResult(Messages.SaveFailed);
             }
@@ -44,17 +44,17 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetAll()
         {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Messages.ListedSuccessful);
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.ListedSuccessful);
         }
 
         public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r=>r.Id==id),Messages.ListedSuccessful);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id), Messages.ListedSuccessful);
         }
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(),Messages.ListedSuccessful);
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.ListedSuccessful);
         }
 
         public IResult Update(Rental rental)

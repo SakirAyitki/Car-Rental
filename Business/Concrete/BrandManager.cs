@@ -25,7 +25,7 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        [ValidationAspect(typeof (BrandValidator))]
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
 
@@ -41,12 +41,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.ListedSuccessful);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.ListedSuccessful);
         }
 
         public IDataResult<Brand> GetById(Expression<Func<Brand, bool>> filter)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(filter),Messages.ListedSuccessful);
+            return new SuccessDataResult<Brand>(_brandDal.Get(filter), Messages.ListedSuccessful);
         }
 
         public IResult Update(Brand brand)
