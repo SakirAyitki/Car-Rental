@@ -1,7 +1,7 @@
-﻿    using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Business;
-using Core.Utilities.Helper.FileHelper;
+using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -40,12 +40,13 @@ namespace Business.Concrete
         {
             _fileHelper.Delete(PathConstants.ImagesPath + carImage.ImagePath);
             _carImageDal.Delete(carImage);
-            return new SuccessResult(Messages.ImagesDeleted);
+            return new SuccessResult(Messages.ImageDeleted);
         }
-
-        public IDataResult<List<CarImage>> GetAll()
+        public IResult Update(IFormFile file, CarImage carImage)
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
+            carImage.ImagePath = _fileHelper.Update(file, PathConstants.ImagesPath + carImage.ImagePath, PathConstants.ImagesPath);
+            _carImageDal.Update(carImage);
+            return new SuccessResult(Messages.ImageUpdated);
         }
 
         public IDataResult<List<CarImage>> GetByCarId(int carId)
@@ -63,28 +64,26 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == imageId));
         }
 
-        public IResult Update(IFormFile file, CarImage carImage)
+        public IDataResult<List<CarImage>> GetAll()
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageLimit(carImage.CarId));
-            if (result != null)
-            {
-                return result;
-            }
-            carImage.ImagePath = _fileHelper.Update(file, PathConstants.ImagesPath + carImage.ImagePath, PathConstants.ImagesPath);
-            _carImageDal.Update(carImage);
-            return new SuccessResult(Messages.CarImageUpdated);
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
-
         private IResult CheckIfCarImageLimit(int carId)
         {
             var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
             if (result >= 5)
             {
-                return new ErrorResult(Messages.CarImageLimitIsFull);
+                return new ErrorResult();
             }
             return new SuccessResult();
         }
+        private IDataResult<List<CarImage>> GetDefaultImage(int carId)
+        {
 
+            List<CarImage> carImage = new List<CarImage>();
+            carImage.Add(new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = "DefaultImage.png" });
+            return new SuccessDataResult<List<CarImage>>(carImage);
+        }
         private IResult CheckCarImage(int carId)
         {
             var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
@@ -93,12 +92,6 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
             return new ErrorResult();
-        }
-        private IDataResult<List<CarImage>> GetDefaultImage(int carId)
-        {
-            List<CarImage> carImage = new List<CarImage>();
-            carImage.Add(new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = "DefaultImage.jpg" });
-            return new SuccessDataResult<List<CarImage>>(carImage);
         }
     }
 }

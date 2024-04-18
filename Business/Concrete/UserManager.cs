@@ -1,14 +1,8 @@
 ﻿using Business.Abstract;
-using Business.Constants;
-using Business.ValidationRules.FluentValidation;
-using Core.Aspects.Autofac.Validation;
-using Core.Utilities;
-using Core.Utilities.Results;
+using Core.Entities.Concrete;
 using DataAccess.Abstract;
-using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,38 +16,19 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-
-        [ValidationAspect(typeof(UserValidator))]
-        public IResult Add(User user)
+        public void Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.SaveSuccessful);
         }
 
-        public IResult Delete(User user)
+        public User GetByMail(string email)
         {
-            _userDal.Delete(user);
-            return new SuccessResult(Messages.DeleteSuccessful);
+            return _userDal.Get(u=>u.Email==email);
         }
 
-        public IDataResult<List<User>> GetAll()
+        public List<OperationClaim> GetClaims(User user)
         {
-            if (_userDal.GetAll().Count == 0)
-            {
-                return new ErrorDataResult<List<User>>(_userDal.GetAll(), Messages.ListedFailed);
-            }
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.ListedSuccessful);
-        }
-
-        public IDataResult<User> GetById(int id)
-        {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id), Messages.ListedSuccessful);
-        }
-
-        public IResult Update(User user)
-        {
-            _userDal.Update(user);
-            return new SuccessResult(Messages.UpdateSuccessful);
+            return _userDal.GetClaims(user);
         }
     }
 }

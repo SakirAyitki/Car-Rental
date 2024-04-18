@@ -8,6 +8,6 @@ namespace Business.Constants
 {
     public class PathConstants
     {
-        public static string ImagesPath = @"C:\Users\ayitk\Pictures\deneme";
+        public static string ImagesPath = "C:\\Users\\ayitk\\Pictures\\car";
     }
 }

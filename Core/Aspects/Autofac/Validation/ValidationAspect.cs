@@ -17,7 +17,7 @@ namespace Core.Aspects.Autofac.Validation
         {
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
             {
-                throw new System.Exception("There isn't validation class!");
+                throw new System.Exception("It's not a validation class!");
             }
 
             _validatorType = validatorType;

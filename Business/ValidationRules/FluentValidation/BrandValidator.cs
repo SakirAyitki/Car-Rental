@@ -10,10 +10,8 @@ namespace Business.ValidationRules.FluentValidation
 {
     public class BrandValidator : AbstractValidator<Brand>
     {
-        public BrandValidator()
+        public BrandValidator() 
         {
-
-            RuleFor(b => b.BrandName).Length(2);
 
         }
     }

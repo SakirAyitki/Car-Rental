@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +18,7 @@ namespace Core.CrossCuttingConcerns.Validation
             {
                 throw new ValidationException(result.Errors);
             }
-
         }
     }
 }
+
